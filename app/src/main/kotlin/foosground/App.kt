@@ -17,19 +17,19 @@ class App {
         val match1 = FoosBallMatchFactory(Player("bob")).createMatch(
             team1 = Team(Player("bob"), Player("alice")),
             team2 = Team(Player("john"), Player("sue")),
-            table = Table("table1", "LIN11", "LIN11.04"),
+            table = Table("table1", "MILANO_1", "ROOM.01"),
             startDateTime = LocalDateTime.parse("2023-01-01T11:00:00")
         )
-        val match2 = FoosBallMatchFactory(Player("mggallet")).createMatch(
-            team1 = Team(Player("mmgallet"), Player("bob")),
-            team2 = Team(Player("blofa"), Player("mpalaz")),
-            table = Table("table1", "LIN11", "LIN11.04"),
+        val match2 = FoosBallMatchFactory(Player("matteo g,")).createMatch(
+            team1 = Team(Player("matteo g."), Player("fabio")),
+            team2 = Team(Player("francesco"), Player("matteo p.")),
+            table = Table("table1", "MILANO_1", "ROOM.02"),
             startDateTime = LocalDateTime.parse("2023-01-02T11:00:00")
         )
         val match3 = FoosBallMatchFactory(Player("alan")).createMatch(
             team1 = Team(Player("alan"), Player("kelly")),
             team2 = Team(Player("paul"), Player("sarah")),
-            table = Table("table1", "DUB12", "DUB12.LG01"),
+            table = Table("table1", "DUBLIN_1", "ROOM.LG01"),
             startDateTime = LocalDateTime.parse("2023-01-01T16:00:00")
         )
         // create in-memory BD
@@ -45,15 +45,17 @@ class App {
             println(it.toString())
         }
         // filter by building
-        println("By building: LIN11")
-        val matchByBuilding = client.listMatches("LIN11")
+        val building = "MILANO_1"
+        println("By building: $building")
+        val matchByBuilding = client.listMatches(building)
         matchByBuilding.forEach {
             println(it.toString())
         }
         // filter by date
-        println("By date: 2023-01-01")
+        val matchDate = "2023-01-01"
+        println("By date: $matchDate")
         val formatter = SimpleDateFormat("yyyy-mm-dd")
-        val matchByDateTime = client.listMatches(formatter.parse("2023-01-01"))
+        val matchByDateTime = client.listMatches(formatter.parse(matchDate))
         matchByDateTime.forEach {
             println(it.toString())
         }
