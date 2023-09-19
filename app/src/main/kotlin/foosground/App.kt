@@ -3,32 +3,40 @@
  */
 package foosground
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import foosground.models.DoublesTableTennisTeam
 import foosground.models.Player
 import foosground.models.Table
-import foosground.models.Team
+import foosground.models.FoosballTeam
+import foosground.models.Match
+import foosground.models.SingleTableTennisTeam
 import foosground.service.factory.FoosBallMatchFactory
+import foosground.service.factory.TennisTableMatchFactory
 import foosground.storage.match.InMemoryMatchStorageClient
 import java.text.SimpleDateFormat
+import java.time.Duration
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class App {
-    fun test() {
+    private fun setUpFoosballMatches() {
         // create matches
         val match1 = FoosBallMatchFactory(Player("bob")).createMatch(
-            team1 = Team(Player("bob"), Player("alice")),
-            team2 = Team(Player("john"), Player("sue")),
+            team1 = FoosballTeam(Player("bob"), Player("alice")),
+            team2 = FoosballTeam(Player("john"), Player("sue")),
             table = Table("table1", "MILANO_1", "ROOM.01"),
-            startDateTime = LocalDateTime.parse("2023-01-01T11:00:00")
+            startDateTime = LocalDateTime.parse("2023-01-01T11:00:00"),
         )
         val match2 = FoosBallMatchFactory(Player("matteo g,")).createMatch(
-            team1 = Team(Player("matteo g."), Player("fabio")),
-            team2 = Team(Player("francesco"), Player("matteo p.")),
+            team1 = FoosballTeam(Player("matteo g."), Player("fabio")),
+            team2 = FoosballTeam(Player("francesco"), Player("matteo p.")),
             table = Table("table1", "MILANO_1", "ROOM.02"),
             startDateTime = LocalDateTime.parse("2023-01-02T11:00:00")
         )
         val match3 = FoosBallMatchFactory(Player("alan")).createMatch(
-            team1 = Team(Player("alan"), Player("kelly")),
-            team2 = Team(Player("paul"), Player("sarah")),
+            team1 = FoosballTeam(Player("alan"), Player("kelly")),
+            team2 = FoosballTeam(Player("paul"), Player("sarah")),
             table = Table("table1", "DUBLIN_1", "ROOM.LG01"),
             startDateTime = LocalDateTime.parse("2023-01-01T16:00:00")
         )
@@ -59,6 +67,32 @@ class App {
         matchByDateTime.forEach {
             println(it.toString())
         }
+    }
+
+    // example of extending class models to tennis table matches
+    fun setUpTennisTableMatches() {
+        // create tennis table singles match
+        val matchOfSingles: Match = TennisTableMatchFactory(Player("bob")).createMatch(
+            team1 = SingleTableTennisTeam(Player("bob")),
+            team2 = SingleTableTennisTeam(Player("john")),
+            table = Table("table1", "MILANO_1", "ROOM.01"),
+            startDateTime = LocalDateTime.parse("2023-01-01T11:00:00"),
+        )
+
+        // create tennis table doubles match
+        val matchOfDoubles: Match = TennisTableMatchFactory(Player("bob")).createMatch(
+            team1 = DoublesTableTennisTeam(Player("bob"), Player("alice")),
+            team2 = DoublesTableTennisTeam(Player("john"), Player("sue")),
+            table = Table("table1", "MILANO_1", "ROOM.01"),
+            startDateTime = LocalDateTime.parse("2023-01-01T11:00:00"),
+        )
+
+    }
+    fun test() {
+        // run test on foosball
+        setUpFoosballMatches()
+        // run test on tennis table
+        setUpTennisTableMatches()
     }
 }
 
