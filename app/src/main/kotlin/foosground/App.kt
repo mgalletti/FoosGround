@@ -3,8 +3,6 @@
  */
 package foosground
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import foosground.models.DoublesTableTennisTeam
 import foosground.models.Player
 import foosground.models.Table
@@ -15,9 +13,7 @@ import foosground.service.factory.FoosBallMatchFactory
 import foosground.service.factory.TennisTableMatchFactory
 import foosground.storage.match.InMemoryMatchStorageClient
 import java.text.SimpleDateFormat
-import java.time.Duration
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class App {
     private fun setUpFoosballMatches() {
