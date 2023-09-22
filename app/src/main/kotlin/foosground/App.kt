@@ -9,6 +9,7 @@ import foosground.models.Table
 import foosground.models.FoosballTeam
 import foosground.models.Match
 import foosground.models.SingleTableTennisTeam
+import foosground.models.serialization.Serializer
 import foosground.service.factory.FoosBallMatchFactory
 import foosground.service.factory.TennisTableMatchFactory
 import foosground.storage.match.InMemoryMatchStorageClient
@@ -82,7 +83,9 @@ class App {
             table = Table("table1", "MILANO_1", "ROOM.01"),
             startDateTime = LocalDateTime.parse("2023-01-01T11:00:00"),
         )
-
+        val serializer = Serializer()
+        println("model to string")
+        println(serializer.serialize(matchOfDoubles))
     }
     fun test() {
         // run test on foosball
