@@ -3,6 +3,7 @@ package foosground.service.factory
 import foosground.commons.Constants
 import foosground.models.Match
 import foosground.models.MatchStatus
+import foosground.models.MatchType
 import foosground.models.Player
 import foosground.models.Table
 import foosground.models.Team
@@ -34,7 +35,8 @@ class TennisTableMatchFactory(
             team2 = team2,
             status = MatchStatus.CREATED,
             createDate = LocalDateTime.now(),
-            lastUpdateDate = LocalDateTime.now()
+            lastUpdateDate = LocalDateTime.now(),
+            type = MatchType.TENNISTABLE
         )
     }
 

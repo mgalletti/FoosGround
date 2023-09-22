@@ -10,6 +10,11 @@ enum class MatchStatus {
     ABORTED
 }
 
+enum class MatchType {
+    FOOSBALL,
+    TENNISTABLE
+}
+
 data class Match(
     val matchId: UUID,
     val startDateTime: LocalDateTime,
@@ -20,5 +25,6 @@ data class Match(
     val team2: Team,
     val status: MatchStatus,
     val createDate: LocalDateTime,
-    val lastUpdateDate: LocalDateTime
+    val lastUpdateDate: LocalDateTime,
+    val type: MatchType
 )
